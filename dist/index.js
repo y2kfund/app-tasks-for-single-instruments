@@ -317,7 +317,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
   for (const [i, c] of d)
     u[i] = c;
   return u;
-}, Ve = /* @__PURE__ */ L($e, [["__scopeId", "data-v-3022ed8f"]]), Ie = { class: "tasks-for-single-instrument-view" }, Ae = { class: "boxes-container" }, Ee = /* @__PURE__ */ H({
+}, Ve = /* @__PURE__ */ L($e, [["__scopeId", "data-v-36df2d60"]]), Ie = { class: "tasks-for-single-instrument-view" }, Ae = { class: "boxes-container" }, Ee = /* @__PURE__ */ H({
   __name: "TasksForSingleInstrument",
   props: {
     symbolRoot: { default: "META" },

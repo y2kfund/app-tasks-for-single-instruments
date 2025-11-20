@@ -505,10 +505,6 @@ onMounted(() => {
   font-weight: 500;
 }
 
-.task-summary:hover {
-  background-color: rgba(255, 152, 0, 0.1);
-}
-
 .task-description {
   margin: 0;
   padding-left: 1.25rem;
