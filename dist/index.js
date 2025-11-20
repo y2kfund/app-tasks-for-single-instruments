@@ -9,7 +9,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
 }, de = ["onMouseenter"], ce = { class: "task-content" }, ve = {
   key: 0,
   class: "edit-mode"
-}, me = { class: "task-header-row" }, pe = ["value"], ye = ["id", "onKeyup"], he = { class: "edit-actions" }, fe = ["onClick"], _e = {
+}, me = { class: "task-header-row" }, pe = ["value"], ye = ["id", "onKeyup"], he = { class: "edit-actions" }, _e = ["onClick"], fe = {
   key: 1,
   class: "view-mode"
 }, ke = { class: "task-header-row" }, be = ["title"], we = ["onClick"], ge = ["value", "onChange"], Ce = ["value"], Se = {
@@ -25,7 +25,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
     userId: {}
   },
   setup(h) {
-    const d = h, u = Z(), i = r([]), c = r(null), v = r(""), f = r(""), _ = r("medium"), I = r(null), k = r(!1), m = r(""), b = r(""), w = r("medium"), x = r("all"), A = [
+    const d = h, u = Z(), i = r([]), c = r(null), v = r(""), _ = r(""), f = r("medium"), I = r(null), k = r(!1), m = r(""), b = r(""), w = r("medium"), x = r("all"), A = [
       { value: "low", label: "Low", color: "#2196f3" },
       { value: "medium", label: "Medium", color: "#ff9800" },
       { value: "high", label: "High", color: "#f44336" }
@@ -53,7 +53,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
     }, E = () => {
       k.value = !1, m.value = "", b.value = "", w.value = "medium";
     }, K = async (o) => {
-      c.value = o.id, v.value = o.summary, f.value = o.description || "", _.value = o.priority, await R();
+      c.value = o.id, v.value = o.summary, _.value = o.description || "", f.value = o.priority, await R();
       const e = document.querySelector(`#edit-summary-${o.id}`);
       e == null || e.focus(), e == null || e.select();
     }, O = async (o) => {
@@ -63,16 +63,16 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
       }
       const { error: e } = await u.schema("hf").from("tasks").update({
         summary: v.value.trim(),
-        description: f.value.trim() || null,
-        priority: _.value,
+        description: _.value.trim() || null,
+        priority: f.value,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
       }).eq("id", o);
       if (!e) {
         const t = i.value.find((p) => p.id === o);
-        t && (t.summary = v.value.trim(), t.description = f.value.trim() || null, t.priority = _.value), c.value = null;
+        t && (t.summary = v.value.trim(), t.description = _.value.trim() || null, t.priority = f.value), c.value = null;
       }
     }, M = () => {
-      c.value = null, v.value = "", f.value = "", _.value = "medium";
+      c.value = null, v.value = "", _.value = "", f.value = "medium";
     }, j = async (o, e) => {
       const { error: t } = await u.schema("hf").from("tasks").update({
         status: e,
@@ -195,7 +195,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
               c.value === t.id ? (n(), l("div", ve, [
                 s("div", me, [
                   y(s("select", {
-                    "onUpdate:modelValue": e[4] || (e[4] = (a) => _.value = a),
+                    "onUpdate:modelValue": e[4] || (e[4] = (a) => f.value = a),
                     class: "priority-select"
                   }, [
                     (n(), l(S, null, T(A, (a) => s("option", {
@@ -203,7 +203,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
                       value: a.value
                     }, g(a.label), 9, pe)), 64))
                   ], 512), [
-                    [U, _.value]
+                    [U, f.value]
                   ]),
                   y(s("input", {
                     id: `edit-summary-${t.id}`,
@@ -219,25 +219,25 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
                   ])
                 ]),
                 y(s("textarea", {
-                  "onUpdate:modelValue": e[6] || (e[6] = (a) => f.value = a),
+                  "onUpdate:modelValue": e[6] || (e[6] = (a) => _.value = a),
                   onKeyup: C(M, ["esc"]),
                   placeholder: "Optional description...",
                   class: "edit-description",
                   rows: "2"
                 }, null, 544), [
-                  [V, f.value]
+                  [V, _.value]
                 ]),
                 s("div", he, [
                   s("button", {
                     onClick: (a) => O(t.id),
                     class: "save-btn"
-                  }, "Save", 8, fe),
+                  }, "Save", 8, _e),
                   s("button", {
                     onClick: M,
                     class: "cancel-btn"
                   }, "Cancel")
                 ])
-              ])) : (n(), l("div", _e, [
+              ])) : (n(), l("div", fe, [
                 s("div", ke, [
                   s("span", {
                     class: "priority-badge",
@@ -317,7 +317,7 @@ const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "head
   for (const [i, c] of d)
     u[i] = c;
   return u;
-}, Ve = /* @__PURE__ */ L($e, [["__scopeId", "data-v-36df2d60"]]), Ie = { class: "tasks-for-single-instrument-view" }, Ae = { class: "boxes-container" }, Ee = /* @__PURE__ */ H({
+}, Ve = /* @__PURE__ */ L($e, [["__scopeId", "data-v-3761b4b6"]]), Ie = { class: "tasks-for-single-instrument-view" }, Ae = { class: "boxes-container" }, Ee = /* @__PURE__ */ H({
   __name: "TasksForSingleInstrument",
   props: {
     symbolRoot: { default: "META" },
