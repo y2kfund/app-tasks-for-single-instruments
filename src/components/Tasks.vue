@@ -34,7 +34,7 @@ const isAddingNew = ref(false)
 const newTaskSummary = ref('')
 const newTaskDescription = ref('')
 const newTaskPriority = ref('medium')
-const filterStatus = ref<string>('all')
+const filterStatus = ref<string>('not_completed')
 
 const priorities = [
   { value: 'low', label: 'Low', color: '#2196f3' },
@@ -47,6 +47,11 @@ const statuses = ['open', 'in_progress', 'completed', 'blocked']
 const filteredTasks = computed(() => {
   if (filterStatus.value === 'all') {
     return tasks.value.filter(t => !t.archived)
+  }
+  if (filterStatus.value === 'not_completed') {
+    return tasks.value.filter(
+      t => (t.status === 'open' || t.status === 'in_progress') && !t.archived
+    )
   }
   return tasks.value.filter(t => t.status === filterStatus.value && !t.archived)
 })
@@ -220,6 +225,7 @@ onMounted(() => {
       <h3 class="box-title">Tasks</h3>
       <div class="header-actions">
         <select v-model="filterStatus" class="status-filter">
+          <option value="not_completed">All Not Completed</option>
           <option value="all">All Tasks</option>
           <option v-for="status in statuses" :key="status" :value="status">
             {{ getStatusLabel(status) }}
