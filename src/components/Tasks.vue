@@ -357,8 +357,8 @@ onMounted(() => {
 
 <style scoped>
 .tasks-box {
-  background: #fff3e0;
-  border-left: 4px solid #ff9800;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  border-left: 4px solid #00bcd4;
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -397,7 +397,7 @@ onMounted(() => {
   width: 20px;
   height: 20px;
   padding: 0;
-  background-color: #ff9800;
+  background-color: #00bcd4;
   color: white;
   border: none;
   border-radius: 50%;
@@ -409,7 +409,7 @@ onMounted(() => {
 }
 
 .add-icon-button:hover {
-  background-color: #f57c00;
+  background-color: #0194a7;
   transform: scale(1.1);
 }
 
@@ -424,13 +424,13 @@ onMounted(() => {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .task-item {
   background: white;
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 0.25rem 0.5rem;
   position: relative;
   transition: all 0.2s ease;
   border: 1px solid #ffe0b2;
@@ -497,7 +497,7 @@ onMounted(() => {
 .task-summary {
   flex: 1;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px 8px 4px 4px;
   border-radius: 4px;
   transition: background-color 0.2s ease;
   font-size: 14px;
@@ -527,7 +527,7 @@ onMounted(() => {
 }
 
 .status-open { background: #e3f2fd; color: #1976d2; }
-.status-in_progress { background: #fff3e0; color: #f57c00; }
+.status-in_progress { background: #fff3e0; color: #0194a7; }
 .status-completed { background: #e8f5e9; color: #388e3c; }
 .status-blocked { background: #ffebee; color: #d32f2f; }
 
@@ -542,7 +542,7 @@ onMounted(() => {
 .new-task-summary {
   flex: 1;
   padding: 6px 10px;
-  border: 2px solid #ff9800;
+  border: 2px solid #00bcd4;
   border-radius: 4px;
   font-size: 14px;
   outline: none;
@@ -550,7 +550,7 @@ onMounted(() => {
 
 .edit-input:focus,
 .new-task-summary:focus {
-  border-color: #f57c00;
+  border-color: #0194a7;
   box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
 }
 
@@ -568,7 +568,7 @@ onMounted(() => {
 
 .edit-description:focus,
 .new-task-description:focus {
-  border-color: #ff9800;
+  border-color: #00bcd4;
 }
 
 .edit-actions,
@@ -580,6 +580,7 @@ onMounted(() => {
 
 .save-btn,
 .cancel-btn {
+  width: auto;
   padding: 4px 12px;
   border: none;
   border-radius: 4px;
@@ -589,12 +590,12 @@ onMounted(() => {
 }
 
 .save-btn {
-  background: #ff9800;
+  background: #00bcd4;
   color: white;
 }
 
 .save-btn:hover {
-  background: #f57c00;
+  background: #0194a7;
 }
 
 .cancel-btn {

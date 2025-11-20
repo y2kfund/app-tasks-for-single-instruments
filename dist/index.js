@@ -9,7 +9,7 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
 }, me = ["onMouseenter"], pe = { class: "task-content" }, ye = {
   key: 0,
   class: "edit-mode"
-}, he = { class: "task-header-row" }, _e = ["value"], fe = ["id", "onKeyup"], ke = { class: "edit-actions" }, be = ["onClick"], we = {
+}, he = { class: "task-header-row" }, fe = ["value"], _e = ["id", "onKeyup"], ke = { class: "edit-actions" }, be = ["onClick"], we = {
   key: 1,
   class: "view-mode"
 }, ge = { class: "task-header-row" }, Ce = ["title"], Se = ["onClick"], Te = ["value", "onChange"], xe = ["value"], Me = {
@@ -27,8 +27,8 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
     symbolRoot: {},
     userId: {}
   },
-  setup(_) {
-    const d = _, u = se(), i = r([]), c = r(null), m = r(""), f = r(""), k = r("medium"), M = r(null), b = r(!1), p = r(""), w = r(""), g = r("medium"), V = r("all"), I = [
+  setup(f) {
+    const d = f, u = se(), i = r([]), c = r(null), m = r(""), _ = r(""), k = r("medium"), M = r(null), b = r(!1), p = r(""), w = r(""), g = r("medium"), V = r("all"), I = [
       { value: "low", label: "Low", color: "#2196f3" },
       { value: "medium", label: "Medium", color: "#ff9800" },
       { value: "high", label: "High", color: "#f44336" }
@@ -56,7 +56,7 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
     }, A = () => {
       b.value = !1, p.value = "", w.value = "", g.value = "medium";
     }, O = async (o) => {
-      c.value = o.id, m.value = o.summary, f.value = o.description || "", k.value = o.priority, await z();
+      c.value = o.id, m.value = o.summary, _.value = o.description || "", k.value = o.priority, await z();
       const e = document.querySelector(`#edit-summary-${o.id}`);
       e == null || e.focus(), e == null || e.select();
     }, B = async (o) => {
@@ -66,16 +66,16 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
       }
       const { error: e } = await u.schema("hf").from("tasks").update({
         summary: m.value.trim(),
-        description: f.value.trim() || null,
+        description: _.value.trim() || null,
         priority: k.value,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
       }).eq("id", o);
       if (!e) {
         const t = i.value.find((y) => y.id === o);
-        t && (t.summary = m.value.trim(), t.description = f.value.trim() || null, t.priority = k.value), c.value = null;
+        t && (t.summary = m.value.trim(), t.description = _.value.trim() || null, t.priority = k.value), c.value = null;
       }
     }, $ = () => {
-      c.value = null, m.value = "", f.value = "", k.value = "medium";
+      c.value = null, m.value = "", _.value = "", k.value = "medium";
     }, Q = async (o, e) => {
       const { error: t } = await u.schema("hf").from("tasks").update({
         status: e,
@@ -210,7 +210,7 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
                     (n(), l(S, null, T(I, (a) => s("option", {
                       key: a.value,
                       value: a.value
-                    }, v(a.label), 9, _e)), 64))
+                    }, v(a.label), 9, fe)), 64))
                   ], 512), [
                     [E, k.value]
                   ]),
@@ -223,18 +223,18 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
                     ],
                     type: "text",
                     class: "edit-input"
-                  }, null, 40, fe), [
+                  }, null, 40, _e), [
                     [U, m.value]
                   ])
                 ]),
                 h(s("textarea", {
-                  "onUpdate:modelValue": e[6] || (e[6] = (a) => f.value = a),
+                  "onUpdate:modelValue": e[6] || (e[6] = (a) => _.value = a),
                   onKeyup: C($, ["esc"]),
                   placeholder: "Optional description...",
                   class: "edit-description",
                   rows: "2"
                 }, null, 544), [
-                  [U, f.value]
+                  [U, _.value]
                 ]),
                 s("div", ke, [
                   s("button", {
@@ -326,19 +326,19 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
       ])
     ]));
   }
-}), j = (_, d) => {
-  const u = _.__vccOpts || _;
+}), j = (f, d) => {
+  const u = f.__vccOpts || f;
   for (const [i, c] of d)
     u[i] = c;
   return u;
-}, Ae = /* @__PURE__ */ j(Ie, [["__scopeId", "data-v-4d9990c3"]]), Ee = { class: "tasks-for-single-instrument-view" }, Ne = { class: "boxes-container" }, qe = /* @__PURE__ */ F({
+}, Ae = /* @__PURE__ */ j(Ie, [["__scopeId", "data-v-a4ff9724"]]), Ee = { class: "tasks-for-single-instrument-view" }, Ne = { class: "boxes-container" }, qe = /* @__PURE__ */ F({
   __name: "TasksForSingleInstrument",
   props: {
     symbolRoot: { default: "META" },
     userId: { default: "67e578fd-2cf7-48a4-b028-a11a3f89bb9b" }
   },
-  setup(_) {
-    const d = _;
+  setup(f) {
+    const d = f;
     return (u, i) => (n(), l("div", Ee, [
       s("div", Ne, [
         te(Ae, {
