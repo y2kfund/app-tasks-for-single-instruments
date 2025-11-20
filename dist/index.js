@@ -1,128 +1,119 @@
-import { defineComponent as F, ref as r, computed as Y, onMounted as Z, createElementBlock as l, openBlock as n, createElementVNode as s, withDirectives as h, Fragment as S, renderList as T, toDisplayString as v, vModelSelect as E, createCommentVNode as x, withKeys as C, vModelText as U, normalizeClass as R, normalizeStyle as ee, createTextVNode as H, nextTick as z, createVNode as te } from "vue";
-import { useSupabase as se } from "@y2kfund/core";
-const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "header-actions" }, ne = ["value"], ie = { class: "tasks-list" }, re = {
+import { defineComponent as H, ref as r, computed as Q, onMounted as W, createElementBlock as l, openBlock as n, createElementVNode as s, withDirectives as y, Fragment as S, renderList as T, toDisplayString as g, vModelSelect as U, createCommentVNode as $, withKeys as C, vModelText as V, normalizeClass as P, normalizeStyle as X, nextTick as R, createVNode as Y } from "vue";
+import { useSupabase as Z } from "@y2kfund/core";
+const ee = { class: "tasks-box" }, te = { class: "header" }, se = { class: "header-actions" }, oe = ["value"], ae = { class: "tasks-list" }, le = {
   key: 0,
   class: "task-item new-task"
-}, ue = { class: "task-content" }, de = { class: "task-header-row" }, ce = ["value"], ve = {
+}, ne = { class: "task-content" }, ie = { class: "task-header-row" }, re = ["value"], ue = {
   key: 1,
   class: "empty-state"
-}, me = ["onMouseenter"], pe = { class: "task-content" }, ye = {
+}, de = ["onMouseenter"], ce = { class: "task-content" }, ve = {
   key: 0,
   class: "edit-mode"
-}, he = { class: "task-header-row" }, fe = ["value"], _e = ["id", "onKeyup"], ke = { class: "edit-actions" }, be = ["onClick"], we = {
+}, me = { class: "task-header-row" }, pe = ["value"], ye = ["id", "onKeyup"], he = { class: "edit-actions" }, fe = ["onClick"], _e = {
   key: 1,
   class: "view-mode"
-}, ge = { class: "task-header-row" }, Ce = ["title"], Se = ["onClick"], Te = ["value", "onChange"], xe = ["value"], Me = {
+}, ke = { class: "task-header-row" }, be = ["title"], we = ["onClick"], ge = ["value", "onChange"], Ce = ["value"], Se = {
   key: 0,
   class: "task-description"
-}, Ve = {
+}, Te = {
   key: 2,
   class: "task-actions"
-}, $e = ["onClick"], De = ["onClick"], Ue = {
-  key: 3,
-  class: "tooltip"
-}, Ie = /* @__PURE__ */ F({
+}, xe = ["onClick"], Me = ["onClick"], $e = /* @__PURE__ */ H({
   __name: "Tasks",
   props: {
     symbolRoot: {},
     userId: {}
   },
-  setup(f) {
-    const d = f, u = se(), i = r([]), c = r(null), m = r(""), _ = r(""), k = r("medium"), M = r(null), b = r(!1), p = r(""), w = r(""), g = r("medium"), V = r("all"), I = [
+  setup(h) {
+    const d = h, u = Z(), i = r([]), c = r(null), v = r(""), f = r(""), _ = r("medium"), I = r(null), k = r(!1), m = r(""), b = r(""), w = r("medium"), x = r("all"), A = [
       { value: "low", label: "Low", color: "#2196f3" },
       { value: "medium", label: "Medium", color: "#ff9800" },
       { value: "high", label: "High", color: "#f44336" }
-    ], N = ["open", "in_progress", "completed", "blocked"], q = Y(() => V.value === "all" ? i.value.filter((o) => !o.archived) : i.value.filter((o) => o.status === V.value && !o.archived)), G = async () => {
+    ], q = ["open", "in_progress", "completed", "blocked"], D = Q(() => x.value === "all" ? i.value.filter((o) => !o.archived) : i.value.filter((o) => o.status === x.value && !o.archived)), z = async () => {
       const { data: o, error: e } = await u.schema("hf").from("tasks").select("*").eq("symbol_root", d.symbolRoot).eq("archived", !1).order("created_at", { ascending: !1 });
       !e && o && (i.value = o);
-    }, J = async () => {
-      b.value = !0, p.value = "", w.value = "", g.value = "medium", await z();
+    }, F = async () => {
+      k.value = !0, m.value = "", b.value = "", w.value = "medium", await R();
       const o = document.querySelector(".new-task-summary");
       o == null || o.focus();
-    }, K = async () => {
-      if (!p.value.trim()) {
-        b.value = !1;
+    }, N = async () => {
+      if (!m.value.trim()) {
+        k.value = !1;
         return;
       }
       const { data: o, error: e } = await u.schema("hf").from("tasks").insert({
         symbol_root: d.symbolRoot,
-        summary: p.value.trim(),
-        description: w.value.trim() || null,
-        priority: g.value,
+        summary: m.value.trim(),
+        description: b.value.trim() || null,
+        priority: w.value,
         created_by: d.userId,
         status: "open"
       }).select();
-      !e && o && (i.value.unshift(o[0]), p.value = "", w.value = "", g.value = "medium", b.value = !1);
-    }, A = () => {
-      b.value = !1, p.value = "", w.value = "", g.value = "medium";
-    }, O = async (o) => {
-      c.value = o.id, m.value = o.summary, _.value = o.description || "", k.value = o.priority, await z();
+      !e && o && (i.value.unshift(o[0]), m.value = "", b.value = "", w.value = "medium", k.value = !1);
+    }, E = () => {
+      k.value = !1, m.value = "", b.value = "", w.value = "medium";
+    }, K = async (o) => {
+      c.value = o.id, v.value = o.summary, f.value = o.description || "", _.value = o.priority, await R();
       const e = document.querySelector(`#edit-summary-${o.id}`);
       e == null || e.focus(), e == null || e.select();
-    }, B = async (o) => {
-      if (!m.value.trim()) {
-        $();
+    }, O = async (o) => {
+      if (!v.value.trim()) {
+        M();
         return;
       }
       const { error: e } = await u.schema("hf").from("tasks").update({
-        summary: m.value.trim(),
-        description: _.value.trim() || null,
-        priority: k.value,
+        summary: v.value.trim(),
+        description: f.value.trim() || null,
+        priority: _.value,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
       }).eq("id", o);
       if (!e) {
-        const t = i.value.find((y) => y.id === o);
-        t && (t.summary = m.value.trim(), t.description = _.value.trim() || null, t.priority = k.value), c.value = null;
+        const t = i.value.find((p) => p.id === o);
+        t && (t.summary = v.value.trim(), t.description = f.value.trim() || null, t.priority = _.value), c.value = null;
       }
-    }, $ = () => {
-      c.value = null, m.value = "", _.value = "", k.value = "medium";
-    }, Q = async (o, e) => {
+    }, M = () => {
+      c.value = null, v.value = "", f.value = "", _.value = "medium";
+    }, j = async (o, e) => {
       const { error: t } = await u.schema("hf").from("tasks").update({
         status: e,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
       }).eq("id", o);
       if (!t) {
-        const y = i.value.find((D) => D.id === o);
-        y && (y.status = e);
+        const p = i.value.find((a) => a.id === o);
+        p && (p.status = e);
       }
-    }, W = async (o) => {
+    }, G = async (o) => {
       const { error: e } = await u.schema("hf").from("tasks").update({
         archived: !0,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
       }).eq("id", o);
       e || (i.value = i.value.filter((t) => t.id !== o));
-    }, X = (o) => {
+    }, J = (o) => {
       var e;
-      return ((e = I.find((t) => t.value === o)) == null ? void 0 : e.color) || "#999";
-    }, L = (o) => o.split("_").map(
+      return ((e = A.find((t) => t.value === o)) == null ? void 0 : e.color) || "#999";
+    }, B = (o) => o.split("_").map(
       (e) => e.charAt(0).toUpperCase() + e.slice(1)
-    ).join(" "), P = (o) => new Date(o).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-    return Z(() => {
-      G();
-    }), (o, e) => (n(), l("div", oe, [
-      s("div", ae, [
+    ).join(" ");
+    return W(() => {
+      z();
+    }), (o, e) => (n(), l("div", ee, [
+      s("div", te, [
         e[10] || (e[10] = s("h3", { class: "box-title" }, "Tasks", -1)),
-        s("div", le, [
-          h(s("select", {
-            "onUpdate:modelValue": e[0] || (e[0] = (t) => V.value = t),
+        s("div", se, [
+          y(s("select", {
+            "onUpdate:modelValue": e[0] || (e[0] = (t) => x.value = t),
             class: "status-filter"
           }, [
             e[8] || (e[8] = s("option", { value: "all" }, "All Tasks", -1)),
-            (n(), l(S, null, T(N, (t) => s("option", {
+            (n(), l(S, null, T(q, (t) => s("option", {
               key: t,
               value: t
-            }, v(L(t)), 9, ne)), 64))
+            }, g(B(t)), 9, oe)), 64))
           ], 512), [
-            [E, V.value]
+            [U, x.value]
           ]),
           s("button", {
-            onClick: J,
+            onClick: F,
             class: "add-icon-button",
             title: "Add new task"
           }, [...e[9] || (e[9] = [
@@ -142,137 +133,137 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
           ])])
         ])
       ]),
-      s("ul", ie, [
-        b.value ? (n(), l("li", re, [
-          s("div", ue, [
-            s("div", de, [
-              h(s("select", {
-                "onUpdate:modelValue": e[1] || (e[1] = (t) => g.value = t),
+      s("ul", ae, [
+        k.value ? (n(), l("li", le, [
+          s("div", ne, [
+            s("div", ie, [
+              y(s("select", {
+                "onUpdate:modelValue": e[1] || (e[1] = (t) => w.value = t),
                 class: "priority-select new-task-priority"
               }, [
-                (n(), l(S, null, T(I, (t) => s("option", {
+                (n(), l(S, null, T(A, (t) => s("option", {
                   key: t.value,
                   value: t.value
-                }, v(t.label), 9, ce)), 64))
+                }, g(t.label), 9, re)), 64))
               ], 512), [
-                [E, g.value]
+                [U, w.value]
               ]),
-              h(s("input", {
-                "onUpdate:modelValue": e[2] || (e[2] = (t) => p.value = t),
+              y(s("input", {
+                "onUpdate:modelValue": e[2] || (e[2] = (t) => m.value = t),
                 onKeyup: [
-                  C(K, ["enter"]),
-                  C(A, ["esc"])
+                  C(N, ["enter"]),
+                  C(E, ["esc"])
                 ],
                 type: "text",
                 placeholder: "Task summary...",
                 class: "new-task-summary"
               }, null, 544), [
-                [U, p.value]
+                [V, m.value]
               ])
             ]),
-            h(s("textarea", {
-              "onUpdate:modelValue": e[3] || (e[3] = (t) => w.value = t),
-              onKeyup: C(A, ["esc"]),
+            y(s("textarea", {
+              "onUpdate:modelValue": e[3] || (e[3] = (t) => b.value = t),
+              onKeyup: C(E, ["esc"]),
               placeholder: "Optional description... (Press Enter on summary or click outside to save)",
               class: "new-task-description",
               rows: "2"
             }, null, 544), [
-              [U, w.value]
+              [V, b.value]
             ]),
             s("div", { class: "new-task-actions" }, [
               s("button", {
-                onClick: K,
+                onClick: N,
                 class: "save-btn"
               }, "Save"),
               s("button", {
-                onClick: A,
+                onClick: E,
                 class: "cancel-btn"
               }, "Cancel")
             ])
           ])
-        ])) : x("", !0),
-        !b.value && q.value.length === 0 ? (n(), l("li", ve, " No tasks yet. Click the + button to add your first task. ")) : x("", !0),
-        (n(!0), l(S, null, T(q.value, (t) => {
-          var y, D;
+        ])) : $("", !0),
+        !k.value && D.value.length === 0 ? (n(), l("li", ue, " No tasks yet. Click the + button to add your first task. ")) : $("", !0),
+        (n(!0), l(S, null, T(D.value, (t) => {
+          var p;
           return n(), l("li", {
             key: t.id,
-            class: R(["task-item", { "task-completed": t.status === "completed" }]),
-            onMouseenter: (a) => M.value = t,
-            onMouseleave: e[7] || (e[7] = (a) => M.value = null)
+            class: P(["task-item", { "task-completed": t.status === "completed" }]),
+            onMouseenter: (a) => I.value = t,
+            onMouseleave: e[7] || (e[7] = (a) => I.value = null)
           }, [
-            s("div", pe, [
-              c.value === t.id ? (n(), l("div", ye, [
-                s("div", he, [
-                  h(s("select", {
-                    "onUpdate:modelValue": e[4] || (e[4] = (a) => k.value = a),
+            s("div", ce, [
+              c.value === t.id ? (n(), l("div", ve, [
+                s("div", me, [
+                  y(s("select", {
+                    "onUpdate:modelValue": e[4] || (e[4] = (a) => _.value = a),
                     class: "priority-select"
                   }, [
-                    (n(), l(S, null, T(I, (a) => s("option", {
+                    (n(), l(S, null, T(A, (a) => s("option", {
                       key: a.value,
                       value: a.value
-                    }, v(a.label), 9, fe)), 64))
+                    }, g(a.label), 9, pe)), 64))
                   ], 512), [
-                    [E, k.value]
+                    [U, _.value]
                   ]),
-                  h(s("input", {
+                  y(s("input", {
                     id: `edit-summary-${t.id}`,
-                    "onUpdate:modelValue": e[5] || (e[5] = (a) => m.value = a),
+                    "onUpdate:modelValue": e[5] || (e[5] = (a) => v.value = a),
                     onKeyup: [
-                      C((a) => B(t.id), ["enter"]),
-                      C($, ["esc"])
+                      C((a) => O(t.id), ["enter"]),
+                      C(M, ["esc"])
                     ],
                     type: "text",
                     class: "edit-input"
-                  }, null, 40, _e), [
-                    [U, m.value]
+                  }, null, 40, ye), [
+                    [V, v.value]
                   ])
                 ]),
-                h(s("textarea", {
-                  "onUpdate:modelValue": e[6] || (e[6] = (a) => _.value = a),
-                  onKeyup: C($, ["esc"]),
+                y(s("textarea", {
+                  "onUpdate:modelValue": e[6] || (e[6] = (a) => f.value = a),
+                  onKeyup: C(M, ["esc"]),
                   placeholder: "Optional description...",
                   class: "edit-description",
                   rows: "2"
                 }, null, 544), [
-                  [U, _.value]
+                  [V, f.value]
                 ]),
-                s("div", ke, [
+                s("div", he, [
                   s("button", {
-                    onClick: (a) => B(t.id),
+                    onClick: (a) => O(t.id),
                     class: "save-btn"
-                  }, "Save", 8, be),
+                  }, "Save", 8, fe),
                   s("button", {
-                    onClick: $,
+                    onClick: M,
                     class: "cancel-btn"
                   }, "Cancel")
                 ])
-              ])) : (n(), l("div", we, [
-                s("div", ge, [
+              ])) : (n(), l("div", _e, [
+                s("div", ke, [
                   s("span", {
                     class: "priority-badge",
-                    style: ee({ backgroundColor: X(t.priority) }),
+                    style: X({ backgroundColor: J(t.priority) }),
                     title: `Priority: ${t.priority}`
-                  }, null, 12, Ce),
+                  }, null, 12, be),
                   s("span", {
                     class: "task-summary",
-                    onClick: (a) => O(t)
-                  }, v(t.summary), 9, Se),
+                    onClick: (a) => K(t)
+                  }, g(t.summary), 9, we),
                   s("select", {
                     value: t.status,
-                    onChange: (a) => Q(t.id, a.target.value),
-                    class: R(["status-select", `status-${t.status}`])
+                    onChange: (a) => j(t.id, a.target.value),
+                    class: P(["status-select", `status-${t.status}`])
                   }, [
-                    (n(), l(S, null, T(N, (a) => s("option", {
+                    (n(), l(S, null, T(q, (a) => s("option", {
                       key: a,
                       value: a
-                    }, v(L(a)), 9, xe)), 64))
-                  ], 42, Te)
+                    }, g(B(a)), 9, Ce)), 64))
+                  ], 42, ge)
                 ]),
-                t.description ? (n(), l("p", Me, v(t.description), 1)) : x("", !0)
+                t.description ? (n(), l("p", Se, g(t.description), 1)) : $("", !0)
               ])),
-              ((y = M.value) == null ? void 0 : y.id) === t.id && c.value !== t.id ? (n(), l("div", Ve, [
+              ((p = I.value) == null ? void 0 : p.id) === t.id && c.value !== t.id ? (n(), l("div", Te, [
                 s("button", {
-                  onClick: (a) => O(t),
+                  onClick: (a) => K(t),
                   class: "action-btn edit-btn",
                   title: "Edit"
                 }, [...e[11] || (e[11] = [
@@ -294,9 +285,9 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
                       "stroke-linecap": "round"
                     })
                   ], -1)
-                ])], 8, $e),
+                ])], 8, xe),
                 s("button", {
-                  onClick: (a) => W(t.id),
+                  onClick: (a) => G(t.id),
                   class: "action-btn archive-btn",
                   title: "Archive"
                 }, [...e[12] || (e[12] = [
@@ -313,43 +304,38 @@ const oe = { class: "tasks-box" }, ae = { class: "header" }, le = { class: "head
                       "stroke-linecap": "round"
                     })
                   ], -1)
-                ])], 8, De)
-              ])) : x("", !0),
-              ((D = M.value) == null ? void 0 : D.id) === t.id && c.value !== t.id ? (n(), l("div", Ue, [
-                H(" Created: " + v(P(t.created_at)), 1),
-                e[13] || (e[13] = s("br", null, null, -1)),
-                H(" Updated: " + v(P(t.updated_at)), 1)
-              ])) : x("", !0)
+                ])], 8, Me)
+              ])) : $("", !0)
             ])
-          ], 42, me);
+          ], 42, de);
         }), 128))
       ])
     ]));
   }
-}), j = (f, d) => {
-  const u = f.__vccOpts || f;
+}), L = (h, d) => {
+  const u = h.__vccOpts || h;
   for (const [i, c] of d)
     u[i] = c;
   return u;
-}, Ae = /* @__PURE__ */ j(Ie, [["__scopeId", "data-v-a4ff9724"]]), Ee = { class: "tasks-for-single-instrument-view" }, Ne = { class: "boxes-container" }, qe = /* @__PURE__ */ F({
+}, Ve = /* @__PURE__ */ L($e, [["__scopeId", "data-v-3022ed8f"]]), Ie = { class: "tasks-for-single-instrument-view" }, Ae = { class: "boxes-container" }, Ee = /* @__PURE__ */ H({
   __name: "TasksForSingleInstrument",
   props: {
     symbolRoot: { default: "META" },
     userId: { default: "67e578fd-2cf7-48a4-b028-a11a3f89bb9b" }
   },
-  setup(f) {
-    const d = f;
-    return (u, i) => (n(), l("div", Ee, [
-      s("div", Ne, [
-        te(Ae, {
+  setup(h) {
+    const d = h;
+    return (u, i) => (n(), l("div", Ie, [
+      s("div", Ae, [
+        Y(Ve, {
           "symbol-root": d.symbolRoot,
           "user-id": d.userId || ""
         }, null, 8, ["symbol-root", "user-id"])
       ])
     ]));
   }
-}), Be = /* @__PURE__ */ j(qe, [["__scopeId", "data-v-41d42e22"]]);
+}), De = /* @__PURE__ */ L(Ee, [["__scopeId", "data-v-41d42e22"]]);
 export {
-  Be as TasksForSingleInstrument,
-  Be as default
+  De as TasksForSingleInstrument,
+  De as default
 };

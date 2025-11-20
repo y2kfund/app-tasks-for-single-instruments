@@ -331,6 +331,7 @@ onMounted(() => {
             <p v-if="task.description" class="task-description">{{ task.description }}</p>
           </div>
 
+          <!-- hoveredTask?.id === task.id &&  -->
           <div v-if="hoveredTask?.id === task.id && editingId !== task.id" class="task-actions">
             <button @click="startEdit(task)" class="action-btn edit-btn" title="Edit">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -345,10 +346,10 @@ onMounted(() => {
             </button>
           </div>
 
-          <div v-if="hoveredTask?.id === task.id && editingId !== task.id" class="tooltip">
+          <!--div v-if="hoveredTask?.id === task.id && editingId !== task.id" class="tooltip">
             Created: {{ formatDate(task.created_at) }}<br />
             Updated: {{ formatDate(task.updated_at) }}
-          </div>
+          </div-->
         </div>
       </li>
     </ul>
@@ -609,15 +610,15 @@ onMounted(() => {
 
 .task-actions {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.4rem;
+  right: 7rem;
   display: flex;
   gap: 0.25rem;
 }
 
 .action-btn {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   padding: 0;
   border: none;
   border-radius: 4px;
@@ -626,7 +627,8 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.9);
+  background: #00bcd4;
+  color: #fff;
 }
 
 .edit-btn:hover {
